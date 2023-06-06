@@ -9,14 +9,19 @@ export default function CreateQuoteCommand() {
     // Fetch the existing quotes
     const existingQuotesStr = (await LocalStorage.getItem("quotes")) as string;
     const existingQuotes = existingQuotesStr ? JSON.parse(existingQuotesStr) : [];
-
-    // Add the new quote to the existing quotes
-    const newQuote = { text: quote };
+  
+    // Fetch the current count
+    const currentCountStr = (await LocalStorage.getItem("quoteCount")) as string;
+    let currentCount = currentCountStr ? parseInt(currentCountStr) : 0;
+  
+    // Increment the count and add the new quote to the existing quotes with an ID
+    const newQuote = { id: `qt${currentCount + 1}`, text: quote };
     const updatedQuotes = [...existingQuotes, newQuote];
-
-    // Write the updated quotes back to the LocalStorage
+  
+    // Write the updated quotes and the updated count back to LocalStorage
     await LocalStorage.setItem("quotes", JSON.stringify(updatedQuotes));
-
+    await LocalStorage.setItem("quoteCount", `${currentCount + 1}`);
+  
     console.log("Quote added:", quote);
     console.log(updatedQuotes);
   };

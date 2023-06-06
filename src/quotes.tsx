@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Detail } from "@raycast/api";
-import { LocalStorage } from "@raycast/api";
+import { Detail, LocalStorage } from "@raycast/api";
 
 export default function Command() {
   const [quote, setQuote] = useState("Loading...");

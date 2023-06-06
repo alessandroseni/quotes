@@ -22,7 +22,8 @@
       "title": "Create Quote",
       "subtitle": "Wisdom compounds",
       "description": "Create a new quote and add it to your repertoire.",
-      "mode": "view"
+      "mode": "view",
+      "icon": "create.png"
     }
   ],
   "dependencies": {
