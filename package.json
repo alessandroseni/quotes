@@ -1,0 +1,46 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "quotes",
+  "title": "Quotes",
+  "description": "A Raycast extension to store and read your important quotes.",
+  "icon": "quotes.png",
+  "author": "alessandros",
+  "categories": [
+    "Fun"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "quotes",
+      "title": "Quotes",
+      "subtitle": "Something to consider",
+      "description": "A selection of quote to sooth the soul and ignite the mind.",
+      "mode": "view"
+    },
+    {
+      "name": "create-quote",
+      "title": "Create Quote",
+      "subtitle": "Wisdom compounds",
+      "description": "Create a new quote and add it to your repertoire.",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.52.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "1.0.5",
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.9",
+    "eslint": "^7.32.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
