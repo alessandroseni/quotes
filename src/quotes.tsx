@@ -1,18 +1,29 @@
-import { ActionPanel, Action, List, Detail, environment } from "@raycast/api";
-import fs from "fs";
-import path from "path";
+import { useState, useEffect } from "react";
+import { Detail } from "@raycast/api";
+import { LocalStorage } from "@raycast/api";
 
 export default function Command() {
-  // Define the path to the quotes file
-  const quotesPath = path.join(environment.assetsPath, "./quotes.json");
+  const [quote, setQuote] = useState("Loading...");
 
-  // Read the file content
-  const quotesContent = fs.readFileSync(quotesPath, "utf-8");
+  useEffect(() => {
+    const fetchQuotes = async () => {
+      // Fetch the quotes from LocalStorage
+      const quotesStr = (await LocalStorage.getItem("quotes")) as string;
+      const quotes = quotesStr ? JSON.parse(quotesStr) : [];
 
-  // Parse the content as JSON
-  const quotes = JSON.parse(quotesContent);
+      // Check if there are any quotes
+      if (quotes.length === 0) {
+        setQuote("No quotes available!");
+      } else {
+        // Choose a random quote
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        setQuote(randomQuote.text);
+      }
+    };
+    
+    fetchQuotes();
+  }, []);
 
   // Return the component
-  return <Detail markdown={`## ${quotes[Math.floor(Math.random() * quotes.length)].text}`} />;
-  
+  return <Detail markdown={`## ${quote}`} />;
 }

@@ -1,29 +1,24 @@
-import { ActionPanel, Form, Action, environment } from "@raycast/api";
+import { ActionPanel, Form, Action } from "@raycast/api";
+import { LocalStorage } from "@raycast/api";
 import { useState } from "react";
-import fs from "fs";
-import path from "path";
-
 
 export default function CreateQuoteCommand() {
   const [quote, setQuote] = useState("");
 
-  const handleSubmit = () => {
-    // Get the existing quotes
-    const quotesPath = path.join(environment.assetsPath, "./quotes.json");
-    const quotesContent = fs.readFileSync(quotesPath, "utf-8");
-    const existingQuotes = fs.existsSync(quotesPath) ? JSON.parse(fs.readFileSync(quotesPath, "utf-8")) : []
+  const handleSubmit = async () => {
+    // Fetch the existing quotes
+    const existingQuotesStr = (await LocalStorage.getItem("quotes")) as string;
+    const existingQuotes = existingQuotesStr ? JSON.parse(existingQuotesStr) : [];
 
     // Add the new quote to the existing quotes
     const newQuote = { text: quote };
     const updatedQuotes = [...existingQuotes, newQuote];
 
-    // Write the updated quotes back to the file
-    fs.writeFileSync(quotesPath, JSON.stringify(updatedQuotes, null, 2));
+    // Write the updated quotes back to the LocalStorage
+    await LocalStorage.setItem("quotes", JSON.stringify(updatedQuotes));
 
     console.log("Quote added:", quote);
-    console.log(quotesPath);
-    console.log(quotesContent);
-    console.log(existingQuotes);
+    console.log(updatedQuotes);
   };
 
   return (
