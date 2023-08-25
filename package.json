@@ -24,6 +24,14 @@
       "description": "Create a new quote and add it to your repertoire.",
       "mode": "view",
       "icon": "create.png"
+    },
+    {
+      "name": "manage-quotes",
+      "title": "Manage Quotes",
+      "subtitle": "Control your wisdom",
+      "description": "Manage your quotes.",
+      "mode": "view",
+      "icon": "manage.png"
     }
   ],
   "dependencies": {

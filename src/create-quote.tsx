@@ -1,5 +1,4 @@
-import { ActionPanel, Form, Action } from "@raycast/api";
-import { LocalStorage } from "@raycast/api";
+import { ActionPanel, Form, Action, LocalStorage } from "@raycast/api";
 import { useState } from "react";
 
 export default function CreateQuoteCommand() {
@@ -23,7 +22,7 @@ export default function CreateQuoteCommand() {
     await LocalStorage.setItem("quoteCount", `${currentCount + 1}`);
   
     console.log("Quote added:", quote);
-    console.log(updatedQuotes);
+    console.log(updatedQuotes); // LOG TEST
   };
 
   return (
