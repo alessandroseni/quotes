@@ -1,4 +1,4 @@
-import { ActionPanel, Form, Action, LocalStorage } from "@raycast/api";
+import { ActionPanel, Form, Action, LocalStorage, Toast, showToast } from "@raycast/api";
 import { useState } from "react";
 
 export default function CreateQuoteCommand() {
@@ -20,7 +20,10 @@ export default function CreateQuoteCommand() {
     // Write the updated quotes and the updated count back to LocalStorage
     await LocalStorage.setItem("quotes", JSON.stringify(updatedQuotes));
     await LocalStorage.setItem("quoteCount", `${currentCount + 1}`);
-  
+
+    // Show a toast after the quote is created
+    await showToast(Toast.Style.Success, "Quote created", "You have created a new quote.");
+
     console.log("Quote added:", quote);
     console.log(updatedQuotes); // LOG TEST
   };
