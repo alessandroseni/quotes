@@ -1,4 +1,4 @@
-import { ActionPanel, List, LocalStorage, Form, Action } from "@raycast/api";
+import { ActionPanel, List, LocalStorage, Form, Action, Icon } from "@raycast/api";
 import { useState, useEffect } from "react";
 
 interface Quote {
@@ -67,10 +67,10 @@ export default function ManageQuotesCommand() {
             <ActionPanel>
               <Action.Push
               title="Edit"
-              icon="pencil"
+              icon={Icon.Pencil}
               target={<EditQuoteForm id={quote.id} initialText={quote.text} onEdit={(newText) => handleEdit(quote.id, newText)} />}
               />
-              <ActionPanel.Item title="Delete" icon="trash" onAction={() => handleDelete(quote.id)} />
+              <ActionPanel.Item title="Delete" icon={Icon.Trash} onAction={() => handleDelete(quote.id)} />
             </ActionPanel>
           }
         />
